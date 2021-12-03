@@ -1,4 +1,4 @@
-const config = require('./config.json')
+const cfg = require('./config.json')
 const functions = require('./functions.js')
 
 function sleep(time) {
@@ -13,12 +13,12 @@ on('playerConnecting', async (name, reason, deferrals) => {
     deferrals.update('# oczekuj, jestes sprawdzany')
     await sleep(3000)
     //console.log(user)
-    if(functions.getUser(config.guildid, user.discord) == false) return deferrals.done('# nie znajdujesz sie na discordzie')
+    if(functions.getUser(cfg.guildid, user.discord) == false) return deferrals.done('# nie znajdujesz sie na discordzie')
     deferrals.update('# znajdujesz sie na disordzie')
     await sleep(500)
     deferrals.update('# trwa sprawdzanie rang')
     await sleep(1000)
-    if(functions.checkRole(config.guildid, user.discord, config.roleid) == false) return deferrals.done('# nie posiadasz whitelisty!')
+    if(functions.checkRole(cfg.guildid, user.discord, cfg.roleid) == false) return deferrals.done('# nie posiadasz whitelisty!')
     deferrals.update('# trwa tworzenie polaczenia')
     await sleep(500)
     if(functions.checkRM(user.discord) == true) {
@@ -26,12 +26,12 @@ on('playerConnecting', async (name, reason, deferrals) => {
         await sleep(500)
         deferrals.update('# trwa laczenie z serwerem')
         deferrals.done()
-        functions.sendLog(config.logchannelid, true, '```STEAM: ' + user.steam + '\nIP: ' + user.ip + '\nDISCORD: ' + user.discord + '\nLICENSE: ' + user.license + '\nXBL: ' + user.xbl + '\nLIVE: ' + user.live + '```')
+        functions.sendLog(cfg.logchannelid, true, '```STEAM: ' + user.steam + '\nIP: ' + user.ip + '\nDISCORD: ' + user.discord + '\nLICENSE: ' + user.license + '\nXBL: ' + user.xbl + '\nLIVE: ' + user.live + '```')
         functions.deleteJSON(user.discord)
         return
     }
     let code = functions.genCode()
-    functions.sendVerifyCode(config.guildid, user.discord, code)
+    functions.sendVerifyCode(cfg.guildid, user.discord, code)
     functions.createJSON(user.discord, code)
     deferrals.update("# kod został przesłany!")
     await sleep(500)
@@ -44,7 +44,7 @@ on('playerConnecting', async (name, reason, deferrals) => {
             deferrals.update('# trwa laczenie z serwerem')
             await sleep(500)
             deferrals.done()
-            functions.sendLog(config.logchannelid, true, '```STEAM: ' + user.steam + '\nIP: ' + user.ip + '\nDISCORD: ' + user.discord + '\nLICENSE: ' + user.license + '\nXBL: ' + user.xbl + '\nLIVE: ' + user.live + '```')
+            functions.sendLog(cfg.logchannelid, true, '```STEAM: ' + user.steam + '\nIP: ' + user.ip + '\nDISCORD: ' + user.discord + '\nLICENSE: ' + user.license + '\nXBL: ' + user.xbl + '\nLIVE: ' + user.live + '```')
             functions.deleteJSON(user.discord)
         }
         //console.log(data, rawData)
