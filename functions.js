@@ -1,7 +1,8 @@
 const Discord = require('discord.js')
 const client = new Discord.Client()
 const config = require("./config.json")
-const json = JSON.parse(LoadResourceFile('fivem_verify', 'requests.json'))
+const scriptname = GetCurrentResourceName()
+const json = JSON.parse(LoadResourceFile(scriptname, 'requests.json'))
 
 client.on("ready", () => {
   console.log('bot on')
@@ -22,7 +23,7 @@ function checkTimestamps() { // funkcja odpowiada za usuwanie przedawnionych kod
       delete json[i]
     }
   }
-  SaveResourceFile('fivem_verify', 'requests.json', JSON.stringify(json, null, 4), -1)
+  SaveResourceFile(scriptname, 'requests.json', JSON.stringify(json, null, 4), -1)
 }
 
 function genCode() { return Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000 } // funkcja odpowiadajaca za wygenerowanie kodu
@@ -38,14 +39,14 @@ function getUser(gid, uid) { // funkcja odpowiada za zdobycie informacji o uzytk
 function createJSON(userid, code) { // funkcja odpowiadajaca za stworzenie objectu w pliku json
   if(json[userid] && json[userid].remember == false) {
     delete json[userid]
-    SaveResourceFile('fivem_verify', 'requests.json', JSON.stringify(json, null, 4), -1)
+    SaveResourceFile(scriptname, 'requests.json', JSON.stringify(json, null, 4), -1)
   } else {
       json[userid] = {
         code: code,
         remember: false,
         timestamp: Math.floor(Date.now() + 21600000) / 1000
       }
-      SaveResourceFile('fivem_verify', 'requests.json', JSON.stringify(json, null, 4), -1)
+      SaveResourceFile(scriptname, 'requests.json', JSON.stringify(json, null, 4), -1)
   }
 }
 
@@ -60,7 +61,7 @@ function updateJSON(userid, code) { // funkcja odpowiadajaca za nadpisywanie obj
     json[userid] = {
       code: code
     }
-    SaveResourceFile('fivem_verify', 'requests.json', JSON.stringify(json), -1)
+    SaveResourceFile(scriptname, 'requests.json', JSON.stringify(json), -1)
   }
 }
 
@@ -84,7 +85,7 @@ function deleteJSON(userid) { // funkcja odpowiadajaca za usuwanie objectu gdy u
   if(!userid) return console.log("missing arguments!")
   if(!json[userid]) return
   delete json[userid]
-  SaveResourceFile('fivem_verify', 'requests.json', JSON.stringify(json), -1)
+  SaveResourceFile(scriptname, 'requests.json', JSON.stringify(json), -1)
 }
 
 function checkCode(userid, code) { // funkcja sprawdzajaca czy podany kod jest prawidłowy
