@@ -61,8 +61,8 @@ function GetIdentifiers(source) {
         live: "Brak"
     }
 
-    for (let i = 0; i < GetNumPlayeconfig.roleidentifiers(source); i++) {
-        const identifier = GetPlayeconfig.roleidentifier(source, i);
+    for (let i = 0; i < GetNumPlayerIdentifiers(source); i++) {
+        const identifier = GetPlayerIdentifier(source, i);
         if (identifier.includes('steam:')) identifiers.steam = identifier;
         if (identifier.includes('ip:')) identifiers.ip = identifier;
         if (identifier.includes('discord:')) identifiers.discord = identifier.substring(8, identifier.length);
