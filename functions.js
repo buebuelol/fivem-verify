@@ -106,5 +106,4 @@ function sendVerifyCode(gid, uid, code)  { // funkcja odpowiadajaca za wyslanie 
 
 module.exports = { checkRole, getUser, genCode, checkRM, createJSON, updateJSON, sendLog, deleteJSON, checkCode, sendVerifyCode }
 
-if(!config.token) return console.log('config: nie wprowadzono tokenu');
 client.login(config.token).catch(() => { console.log('bot: podany token jest nieprawidłowy')})
