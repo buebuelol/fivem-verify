@@ -7,7 +7,7 @@ function sleep(time) {
 
 on('playerConnecting', async (name, reason, deferrals) => {
     let user = GetIdentifiers(source)
-    if(user.discord == 'Brak') return deferrals.done('# nie znaleziono twojego discordid!')
+    if(user.discord == 'Brak') return deferrals.done('# nie znajdujesz sie na discordzie')
     deferrals.defer()
     await sleep(1)
     deferrals.update('# oczekuj, jestes sprawdzany')
