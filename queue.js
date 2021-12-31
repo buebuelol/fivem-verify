@@ -26,7 +26,7 @@ on('playerConnecting', async (name, reason, deferrals) => {
         await sleep(500)
         deferrals.update('# trwa laczenie z serwerem')
         deferrals.done()
-        functions.sendLog(cfg.logchannelid, true, '```STEAM: ' + user.steam + '\nIP: ' + user.ip + '\nDISCORD: ' + user.discord + '\nLICENSE: ' + user.license + '\nXBL: ' + user.xbl + '\nLIVE: ' + user.live + '```')
+        functions.sendLog(cfg.logchannelid, true, '```STEAM: ' + user.steam + '\nDISCORD: ' + user.discord + '\nLICENSE: ' + user.license + '\nXBL: ' + user.xbl + '\nLIVE: ' + user.live + '```')
         functions.deleteJSON(user.discord)
         return
     }
@@ -44,7 +44,7 @@ on('playerConnecting', async (name, reason, deferrals) => {
             deferrals.update('# trwa laczenie z serwerem')
             await sleep(500)
             deferrals.done()
-            functions.sendLog(cfg.logchannelid, true, '```STEAM: ' + user.steam + '\nIP: ' + user.ip + '\nDISCORD: ' + user.discord + '\nLICENSE: ' + user.license + '\nXBL: ' + user.xbl + '\nLIVE: ' + user.live + '```')
+            functions.sendLog(cfg.logchannelid, true, '```STEAM: ' + user.steam + '\nDISCORD: ' + user.discord + '\nLICENSE: ' + user.license + '\nXBL: ' + user.xbl + '\nLIVE: ' + user.live + '```')
             functions.deleteJSON(user.discord)
         }
         //console.log(data, rawData)
@@ -54,7 +54,6 @@ on('playerConnecting', async (name, reason, deferrals) => {
 function GetIdentifiers(source) {
     const identifiers = {
         steam: "Brak",
-        ip: "Brak",
         discord: "Brak",
         license: "Brak",
         xbl: "Brak",
@@ -64,7 +63,6 @@ function GetIdentifiers(source) {
     for (let i = 0; i < GetNumPlayerIdentifiers(source); i++) {
         const identifier = GetPlayerIdentifier(source, i);
         if (identifier.includes('steam:')) identifiers.steam = identifier;
-        if (identifier.includes('ip:')) identifiers.ip = identifier;
         if (identifier.includes('discord:')) identifiers.discord = identifier.substring(8, identifier.length);
         if (identifier.includes('license:')) identifiers.license = identifier;
         if (identifier.includes('xbl:')) identifiers.xbl = identifier;
