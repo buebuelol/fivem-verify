@@ -58,9 +58,7 @@ function checkRM(userid) { // funkcja odpowiadajaca za sprawdzanie czy uzytkowni
 
 function updateJSON(userid, code) { // funkcja odpowiadajaca za nadpisywanie objectu w pliku json
   if(json[userid]) return; else {
-    json[userid] = {
-      code: code
-    }
+    json[userid].remember = true
     SaveResourceFile(scriptname, 'requests.json', JSON.stringify(json), -1)
   }
 }
