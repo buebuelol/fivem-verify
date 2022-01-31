@@ -1,5 +1,6 @@
 const Discord = require('discord.js')
 const client = new Discord.Client()
+const config = require('./config.json')
 const scriptname = GetCurrentResourceName()
 const json = JSON.parse(LoadResourceFile(scriptname, 'requests.json'))
 
