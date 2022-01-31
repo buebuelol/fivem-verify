@@ -40,7 +40,7 @@ on('playerConnecting', async (name, reason, deferrals) => {
         if(functions.checkCode(user.discord, data.password) == false) {
             deferrals.done('# podany kod jest nieprawidlowy')
         } else {
-            if(data.remember == 'true') updateJSON(user.discord, true)
+            if(data.remember == 'true') functions.updateJSON(user.discord, true)
             deferrals.update('# trwa laczenie z serwerem')
             await sleep(500)
             deferrals.done()
